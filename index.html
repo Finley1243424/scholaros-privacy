@@ -64,7 +64,7 @@
 
 <header>
   <h1>ScholarOS Privacy Policy</h1>
-  <p class="meta"><strong>Last updated:</strong> 18 August 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.9.0 and later</p>
+  <p class="meta"><strong>Last updated:</strong> 22 August 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.9.0 and later</p>
 </header>
 
 <p class="lede">ScholarOS is a browser extension that copies your upcoming assignments off your college's learning management system and into a planner. This page explains what it reads, what it keeps, and the one situation in which anything leaves your computer.</p>
@@ -111,10 +111,12 @@
   <thead><tr><th>Store</th><th>What is in it</th></tr></thead>
   <tbody>
     <tr><td><code>chrome.storage.local</code></td><td>The import review queue, your import-window setting (how many days ahead to scan), and your Gemini API key if you have entered one</td></tr>
-    <tr><td>IndexedDB, database <code>ScholarOS_DB</code></td><td>Your saved tasks, reminders, and class folders, including any document links you have pasted</td></tr>
+    <tr><td>IndexedDB, database <code>ScholarOS_DB</code></td><td>Your saved tasks, reminders, and class folders, including any document links you have pasted, plus the completion timings described below</td></tr>
   </tbody>
 </table>
 </div>
+
+<p><strong>Completion timings.</strong> When you mark an assignment finished, ScholarOS records four numbers: which task it was, which class it belonged to, when it was due, and when you finished it. That is the whole record: no title, no notes, no content. It exists so Smart Plan can notice that you finish one class's work the night before and another's three days early, and schedule accordingly. Marking a task unfinished again, or deleting it, deletes its timing record. "Forget all of it" in Smart Plan erases the lot at once.</p>
 
 <p>Nothing is uploaded, backed up, or synced. If your browser profile syncs across your own devices, that is your browser doing it under your own account, not ScholarOS.</p>
 
@@ -129,7 +131,7 @@
 <p>When you do use them, and only at the moment you click the button:</p>
 <ul>
   <li><strong>Paste-to-task</strong> sends the text or link you pasted into the box.</li>
-  <li><strong>Smart Plan</strong> sends your unfinished tasks — title, course name, due date, status, and the internal numeric ID — along with the scheduling preferences you set (preferred study time, subjects you marked as weak, and the difficulty and weekly-hours figures you gave each class), plus the current date and time.</li>
+  <li><strong>Smart Plan</strong> sends the unfinished tasks that are actually due soon: title, course name, due date, status, and the internal numeric ID. It also sends the scheduling preferences you set (preferred study time, subjects you marked as weak, and the difficulty and weekly-hours figures you gave each class), the current date and time, and a summary of your completion timings: per class, how far ahead of the deadline you typically finish, roughly what hour of day you work, and how many completions that is based on. Tasks that are finished, undated, or not due for a long time are not sent at all.</li>
 </ul>
 
 <p>Those requests go to Google under <strong>your</strong> API key, so they are governed by your own agreement with Google and by Google's API terms and privacy policy — not by ScholarOS, which never sees the response on any server of its own. Nothing is sent in the background, on a schedule, or without you starting it.</p>
