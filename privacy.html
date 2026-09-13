@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ScholarOS — Privacy Policy</title>
+<title>ScholarOS Privacy Policy</title>
 <meta name="description" content="What the ScholarOS browser extension reads, what it stores on your device, and the one thing that ever leaves your computer." />
 <style>
   :root {
@@ -65,7 +65,7 @@
 <header>
   <p class="meta" style="margin-bottom:.9rem"><a href="./">&larr; ScholarOS</a></p>
   <h1>ScholarOS Privacy Policy</h1>
-  <p class="meta"><strong>Last updated:</strong> 22 August 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.9.0 and later</p>
+  <p class="meta"><strong>Last updated:</strong> 8 September 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.9.1 and later</p>
 </header>
 
 <p class="lede">ScholarOS is a browser extension that copies your upcoming assignments off your college's learning management system and into a planner. This page explains what it reads, what it keeps, and the one situation in which anything leaves your computer.</p>
@@ -74,13 +74,9 @@
 
 <h2>1. What ScholarOS reads</h2>
 
-<p>ScholarOS runs only on two web addresses:</p>
-<ul>
-  <li><code>*://*.brightspace.com/*</code></li>
-  <li><code>*://mycourses.rit.edu/*</code></li>
-</ul>
+<p>ScholarOS requests no access to any website when you install it. The install prompt asks for no websites at all, because at that moment ScholarOS is allowed to read nothing.</p>
 
-<p>These are declared in the extension's manifest. A browser extension can only read pages it has declared, so on every other site on the internet — your email, your bank, your search history — ScholarOS is not running and cannot see anything.</p>
+<p>It asks for one school at a time. When you pick your school, your browser asks whether ScholarOS may read that school's web address, and only that address. Nothing else on the internet is included: not your email, not your bank, not your search history. Settings lists every school you have granted, and removing one there hands the access back to your browser.</p>
 
 <p>On those two hosts, and only after you have signed in yourself, ScholarOS reads the page you are already looking at and picks out:</p>
 <ul>
@@ -100,7 +96,7 @@
   <li><strong>Cookies and session tokens.</strong> The extension does not request the <code>cookies</code> permission, so the browser does not give it access to them.</li>
   <li><strong>Your browsing history.</strong> The extension does not request the <code>history</code> permission.</li>
   <li><strong>Anything on any other website.</strong> See the host list in section 1.</li>
-  <li><strong>Your Google account.</strong> ScholarOS requests no OAuth scopes and has no access to Google Drive, Gmail, or any Google service on your behalf. There is no consent screen because there is nothing to consent to.</li>
+  <li><strong>Your Google account, unless you connect Calendar.</strong> ScholarOS requests no OAuth scope at all until you press Connect in Settings, and the only scope it ever asks for is <code>calendar.events</code>, which lets it create and update calendar events. It has no access to Google Drive, Gmail, your contacts, or your existing calendar entries, and it never asks for any of them. If you never connect Calendar, there is no consent screen because there is nothing to consent to.</li>
 </ul>
 
 <h2>3. Where your data is stored</h2>
@@ -111,7 +107,7 @@
 <table>
   <thead><tr><th>Store</th><th>What is in it</th></tr></thead>
   <tbody>
-    <tr><td><code>chrome.storage.local</code></td><td>The import review queue, your import-window setting (how many days ahead to scan), and your Gemini API key if you have entered one</td></tr>
+    <tr><td><code>chrome.storage.local</code></td><td>The import review queue, your import-window setting (how many days ahead to scan), your Gemini API key if you have entered one, the schools you have added, and whether you have connected Google Calendar</td></tr>
     <tr><td>IndexedDB, database <code>ScholarOS_DB</code></td><td>Your saved tasks, reminders, and class folders, including any document links you have pasted, plus the completion timings described below</td></tr>
   </tbody>
 </table>
@@ -127,7 +123,7 @@
 
 <p>ScholarOS has exactly one outbound network path: <strong>Google's Gemini API, using an API key you supply yourself.</strong></p>
 
-<p>This powers two optional features — Smart Plan, and pasting text or a link to turn it into a task. Both are off until you paste your own free Gemini key into Settings. Without a key, the features tell you so and do nothing. No request is made.</p>
+<p>This powers two optional features: Smart Plan, and pasting text or a link to turn it into a task. Both are off until you paste your own free Gemini key into Settings. Without a key, the features tell you so and do nothing. No request is made.</p>
 
 <p>When you do use them, and only at the moment you click the button:</p>
 <ul>
@@ -135,11 +131,21 @@
   <li><strong>Smart Plan</strong> sends the unfinished tasks that are actually due soon: title, course name, due date, status, and the internal numeric ID. It also sends the scheduling preferences you set (preferred study time, subjects you marked as weak, and the difficulty and weekly-hours figures you gave each class), the current date and time, and a summary of your completion timings: per class, how far ahead of the deadline you typically finish, roughly what hour of day you work, and how many completions that is based on. Tasks that are finished, undated, or not due for a long time are not sent at all.</li>
 </ul>
 
-<p>Those requests go to Google under <strong>your</strong> API key, so they are governed by your own agreement with Google and by Google's API terms and privacy policy — not by ScholarOS, which never sees the response on any server of its own. Nothing is sent in the background, on a schedule, or without you starting it.</p>
+<p>Those requests go to Google under <strong>your</strong> API key, so they are governed by your own agreement with Google and by Google's API terms and privacy policy, not by ScholarOS, which never sees the response on any server of its own. Nothing is sent in the background, on a schedule, or without you starting it.</p>
+<h3>Google Calendar, if you connect it</h3>
+
+<p>This is off until you press Connect in Settings. Nothing about Calendar happens before that.</p>
+
+<p>When you press Connect, two things are asked for and both are shown to you by your browser: permission for ScholarOS to reach Google's API, and a Google sign-in asking only for the <code>calendar.events</code> scope. That scope lets ScholarOS create and update events. It does not let ScholarOS read your existing calendar, your contacts, your email, or anything else in your account.</p>
+
+<p>Once connected, and only when you press the sync button on a Smart Plan, ScholarOS sends the study blocks in that plan: a title, a start and end time, and the name of the class each block is for. Nothing else about your account leaves the device, and nothing syncs on a schedule or in the background.</p>
+
+<p>Pressing Disconnect in Settings clears the connection and tells Google to forget the grant, so it stops showing in your Google account's connected-apps list rather than lingering there invisibly.</p>
+
 
 <h3>About your Gemini API key</h3>
 
-<p>Your key is stored in your browser's extension storage, on your device, in plain text — the same way any browser extension setting is stored. It is sent to Google, and to nowhere else, as part of the API requests above. You can clear it at any time by emptying the field in Settings. You can also revoke it entirely at Google AI Studio, which takes effect regardless of what ScholarOS does.</p>
+<p>Your key is stored in your browser's extension storage, on your device, in plain text. That is the same way any browser extension setting is stored. It is sent to Google, and to nowhere else, as part of the API requests above. You can clear it at any time by emptying the field in Settings. You can also revoke it entirely at Google AI Studio, which takes effect regardless of what ScholarOS does.</p>
 
 <h2>5. Document links</h2>
 
@@ -155,13 +161,14 @@
   <tbody>
     <tr><td><code>sidePanel</code></td><td>Shows the planner in the browser's side panel next to your LMS page</td></tr>
     <tr><td><code>storage</code></td><td>Saves your tasks, settings, and review queue on your device (section 3)</td></tr>
-    <tr><td><code>tabs</code></td><td>Opens ScholarOS's own full-page dashboard in a new tab when you click through from the side panel. It is used for nothing else: ScholarOS does not list, read, or watch your open tabs</td></tr>
-    <tr><td>Host access to <code>*.brightspace.com</code> and <code>mycourses.rit.edu</code></td><td>Reads the assignment list off the LMS page you are signed into (section 1)</td></tr>
+    <tr><td><code>identity</code></td><td>Signs you in to Google, only if you connect Google Calendar. Requests the <code>calendar.events</code> scope and nothing else</td></tr>
+    <tr><td><code>scripting</code></td><td>Points ScholarOS at a school the moment you add it, instead of at the next browser restart. It is never used on a site you have not added</td></tr>
+    <tr><td>Access to the school you choose</td><td>Reads the assignment list off the page you are signed into (section 1). Granted by you, one school at a time, and revocable in Settings</td></tr>
   </tbody>
 </table>
 </div>
 
-<p>There are no others. In particular there is no <code>identity</code>, no <code>scripting</code>, no <code>activeTab</code>, no <code>cookies</code>, no <code>history</code>, and no OAuth configuration.</p>
+<p>There are no others. In particular there is no <code>activeTab</code>, no <code>cookies</code>, no <code>history</code>, and no OAuth scope beyond <code>calendar.events</code>, which is requested only if you connect Google Calendar. ScholarOS has never had a server, and adding Canvas, Blackboard and Moodle did not change that: those systems are read through your own school's web address, using the session you are already signed into, and nothing is sent anywhere else.</p>
 
 <h2>7. Payment</h2>
 
@@ -175,13 +182,13 @@
 
 <h2>8. Children</h2>
 
-<p>ScholarOS is built for college students and is not directed at children under 13. It collects no personal information from anyone, of any age, on any server — see section 3.</p>
+<p>ScholarOS is built for college students and is not directed at children under 13. It collects no personal information from anyone, of any age, on any server. See section 3.</p>
 
 <h2>9. Removing everything</h2>
 
 <p>Uninstall the extension. Your browser deletes the extension's storage with it, which is every piece of data described in section 3.</p>
 
-<p>There is no account to close, no data-deletion request to file, and no authorization to revoke, because none was ever granted. If you entered a Gemini key and want to be thorough, revoke it at Google AI Studio as well — that is a key Google issued to you, not to ScholarOS.</p>
+<p>There is no account to close, no data-deletion request to file, and no authorization to revoke, because none was ever granted. If you entered a Gemini key and want to be thorough, revoke it at Google AI Studio as well. That is a key Google issued to you, not to ScholarOS.</p>
 
 <h2>10. Changes to this policy</h2>
 
