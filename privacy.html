@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ScholarOS Privacy Policy</title>
-<meta name="description" content="What the ScholarOS browser extension reads, what it stores on your device, and the one thing that ever leaves your computer." />
+<meta name="description" content="What the ScholarOS browser extension reads, what it stores on your device, and the only two things that ever leave your computer." />
 <style>
   :root {
     --bg: #ffffff;
@@ -65,10 +65,10 @@
 <header>
   <p class="meta" style="margin-bottom:.9rem"><a href="./">&larr; ScholarOS</a></p>
   <h1>ScholarOS Privacy Policy</h1>
-  <p class="meta"><strong>Last updated:</strong> 8 September 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.9.1 and later</p>
+  <p class="meta"><strong>Last updated:</strong> 13 September 2026 &middot; <strong>Applies to:</strong> ScholarOS browser extension, version 0.10.0 and later</p>
 </header>
 
-<p class="lede">ScholarOS is a browser extension that copies your upcoming assignments off your college's learning management system and into a planner. This page explains what it reads, what it keeps, and the one situation in which anything leaves your computer.</p>
+<p class="lede">ScholarOS is a browser extension that copies your upcoming assignments off your college's learning management system and into a planner. This page explains what it reads, what it keeps, and the only two situations in which anything leaves your computer.</p>
 
 <p>The short version: <strong>there is no ScholarOS server.</strong> No account, no sign-up, no analytics, and nowhere for your data to be sent, because nothing was ever built to receive it. Everything ScholarOS knows about you sits in your own browser's storage on your own machine.</p>
 
@@ -78,7 +78,7 @@
 
 <p>It asks for one school at a time. When you pick your school, your browser asks whether ScholarOS may read that school's web address, and only that address. Nothing else on the internet is included: not your email, not your bank, not your search history. Settings lists every school you have granted, and removing one there hands the access back to your browser.</p>
 
-<p>On those two hosts, and only after you have signed in yourself, ScholarOS reads the page you are already looking at and picks out:</p>
+<p>On a school you have added, and only after you have signed in yourself, ScholarOS reads the page you are already looking at and picks out:</p>
 <ul>
   <li>assignment and quiz titles</li>
   <li>course names and course codes</li>
@@ -95,7 +95,7 @@
   <li><strong>Duo, SSO, or any other multi-factor step.</strong> ScholarOS does not bypass, automate, remember, or interact with them in any way. It simply waits until you are already signed in.</li>
   <li><strong>Cookies and session tokens.</strong> The extension does not request the <code>cookies</code> permission, so the browser does not give it access to them.</li>
   <li><strong>Your browsing history.</strong> The extension does not request the <code>history</code> permission.</li>
-  <li><strong>Anything on any other website.</strong> See the host list in section 1.</li>
+  <li><strong>Anything on any other website.</strong> Only the schools you added yourself, as described in section 1.</li>
   <li><strong>Your Google account, unless you connect Calendar.</strong> ScholarOS requests no OAuth scope at all until you press Connect in Settings, and the only scope it ever asks for is <code>calendar.events</code>, which lets it create and update calendar events. It has no access to Google Drive, Gmail, your contacts, or your existing calendar entries, and it never asks for any of them. If you never connect Calendar, there is no consent screen because there is nothing to consent to.</li>
 </ul>
 
@@ -119,9 +119,11 @@
 
 <p>There is no ScholarOS account, no ScholarOS login, and no ScholarOS server holding a copy.</p>
 
-<h2>4. The one thing that leaves your device</h2>
+<h2>4. What leaves your device</h2>
 
-<p>ScholarOS has exactly one outbound network path: <strong>Google's Gemini API, using an API key you supply yourself.</strong></p>
+<p>ScholarOS has two outbound network paths, and both go to Google. Both are optional and both are off until you switch them on: <strong>the Gemini API, under an API key you supply yourself</strong>, and <strong>Google Calendar, if you connect it</strong>.</p>
+
+<h3>Google's Gemini API, under a key you supply</h3>
 
 <p>This powers two optional features: Smart Plan, and pasting text or a link to turn it into a task. Both are off until you paste your own free Gemini key into Settings. Without a key, the features tell you so and do nothing. No request is made.</p>
 
